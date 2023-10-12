@@ -14,7 +14,33 @@
     -webkit-text-size-adjust: 100%;
 }
 
+body {
+    margin: 0;
+}
+
 a {
     /* text-decoration: none; */
     color: white;
+}
+
+/* Navigation Section */
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #242424;
+    color: white;
+    background-color: blue;
+}
+
+.nav-bar ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-bar li {
+    padding: 0 1rem;
 }

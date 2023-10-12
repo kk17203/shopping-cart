@@ -3,9 +3,8 @@ import { Link, Outlet } from "react-router-dom";
 function App() {
     return (
         <div>
-            <h1>Shopping Cart Project</h1>
-            <p>Here are some links</p>
-            <nav>
+            <nav className="nav-bar">
+                <h1>Shopping Cart Project</h1>
                 <ul>
                     <li>
                         <Link to="/">Home Page</Link>
