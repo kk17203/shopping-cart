@@ -34,11 +34,11 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 15px 32px;
     background-color: #242424;
     color: white;
     background-color: rgba(6, 6, 179, 0.671);
-    min-width: 1200px;
+    max-width: 1200px;
 }
 
 .nav-bar ul {
@@ -50,4 +50,29 @@ a {
 
 .nav-bar li {
     padding: 0 1rem;
+}
+
+.shop-card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1160px;
+    margin: 20px;
+}
+
+.item-card {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 100px 1fr 1fr 1fr;
+    padding: 10px;
+    border: 1px solid white;
+}
+
+.item-title {
+    grid-column: 1/-1;
+}
+
+.item-img {
+    max-width: 200px;
+    grid-column: 1 / 2;
+    grid-row: 2 / 5;
 }
