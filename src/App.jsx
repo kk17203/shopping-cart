@@ -1,6 +1,11 @@
 import { Link, Outlet } from "react-router-dom";
+import { useState } from "react";
+import Badge from "@material-ui/core/Badge";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 function App() {
+    const [itemCount, setItemCount] = useState(1);
+
     return (
         <div>
             <nav className="nav-bar">
@@ -12,8 +17,12 @@ function App() {
                     <li>
                         <Link to="shoppage">Shop Page</Link>
                     </li>
+                    <Badge badgeContent={itemCount} color="primary">
+                        <ShoppingCartIcon />{" "}
+                    </Badge>
                 </ul>
             </nav>
+
             <Outlet />
         </div>
     );

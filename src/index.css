@@ -31,7 +31,7 @@ a {
     padding: 1rem 2rem;
     background-color: #242424;
     color: white;
-    background-color: blue;
+    background-color: rgba(6, 6, 179, 0.671);
 }
 
 .nav-bar ul {

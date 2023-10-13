@@ -1,7 +1,7 @@
 function ShopPage() {
     return (
         <div>
-            <span>This is the Shop Page</span>
+            <span>Shopping page</span>
         </div>
     );
 }
