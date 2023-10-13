@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import { useState } from "react";
 import Badge from "@material-ui/core/Badge";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 
 function App() {
     const [itemCount, setItemCount] = useState(1);
@@ -17,9 +17,11 @@ function App() {
                     <li>
                         <Link to="shoppage">Shop Page</Link>
                     </li>
-                    <Badge badgeContent={itemCount} color="primary">
-                        <ShoppingCartIcon />{" "}
-                    </Badge>
+                    <Link to="cartpage">
+                        <Badge badgeContent={itemCount} color="secondary">
+                            <ShoppingCartIcon />{" "}
+                        </Badge>
+                    </Link>
                 </ul>
             </nav>
 
