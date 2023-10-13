@@ -24,13 +24,28 @@ function ShopPage() {
             mode: "cors",
         })
             .then((response) => response.json())
-            .then((json) => setShopItems(json))
+            .then((json) => {
+                // this next few lines takes the array from the api and adds a quantity field
+                const updatedProducts = json.map((item) => ({
+                    ...item,
+                    quantity: 0,
+                }));
+                setShopItems(updatedProducts);
+            })
             .catch((error) => setError(error))
             .finally(() => setLoading(false));
     }, []);
 
     if (error) return <p>A network error was encountered</p>;
     if (loading) return <p>Loading...</p>;
+
+    // const updatedProducts = shopItems.map((item) => {
+    //     return {
+    //         ...item,
+    //         quantity: 0,
+    //     };
+    // });
+    // setShopItems(updatedProducts);
 
     return (
         <>
@@ -60,6 +75,7 @@ function ShopPage() {
                         <p className="item-rating">
                             {item.rating.rate} out of {item.rating.count}
                         </p>
+                        <p className="quantity">{item.quantity}</p>
                         <div className="btn-set">
                             <button
                                 className="remove-btn"
@@ -70,8 +86,8 @@ function ShopPage() {
                                 {""}
                                 <RemoveIcon fontSize="small" />
                             </button>
-                            <form className="quantity">
-                                <input type="text" />
+                            <form className="quantity" id="quantity">
+                                <input type="text" value={item.quantity} />
                             </form>
                             <button
                                 className="add-btn"
