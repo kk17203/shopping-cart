@@ -2,9 +2,10 @@ import { Link, Outlet } from "react-router-dom";
 import { useState } from "react";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
+import ShopPage from "./ShopPage";
 
 function App() {
-    const [itemCount, setItemCount] = useState(1);
+    let [itemCount, setItemCount] = useState(1);
 
     return (
         <div>
@@ -24,7 +25,7 @@ function App() {
                     </Link>
                 </ul>
             </nav>
-
+            <ShopPage itemCount={itemCount} setItemCount={setItemCount} />
             <Outlet />
         </div>
     );
