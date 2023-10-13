@@ -1,5 +1,12 @@
+import NavBar from "./NavBar";
+
 function CartPage() {
-    return <div>Cart Page</div>;
+    return (
+        <>
+            <NavBar />
+            <span>This is the Cart Page</span>
+        </>
+    );
 }
 
 export default CartPage;

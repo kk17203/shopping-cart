@@ -38,7 +38,7 @@ a {
     background-color: #242424;
     color: white;
     background-color: rgba(6, 6, 179, 0.671);
-    max-width: 1200px;
+    width: 1200px;
 }
 
 .nav-bar ul {
@@ -75,4 +75,46 @@ a {
     max-width: 200px;
     grid-column: 1 / 2;
     grid-row: 2 / 5;
+}
+
+.btn-set {
+    display: flex;
+    align-items: center;
+}
+
+.add-btn,
+.remove-btn {
+    width: 40px;
+    height: 30px;
+    border-radius: 5%;
+    border: 1px solid rgb(50, 36, 240);
+    background-color: rgba(6, 6, 179, 0);
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.add-btn:hover,
+.remove-btn:hover {
+    background-color: rgba(6, 6, 179, 0.671);
+}
+
+.add-btn:active,
+.remove-btn:active {
+    background-color: rgba(40, 40, 180, 0.671);
+}
+
+.quantity input {
+    width: 40px;
+    height: 30px;
+    border-radius: 5%;
+    border: 1px solid rgb(50, 36, 240);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
 }

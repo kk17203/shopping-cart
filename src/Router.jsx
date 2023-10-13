@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
-import HomePage from "./HomePage.jsx";
+// import HomePage from "./HomePage.jsx";
 import ShopPage from "./ShopPage.jsx";
 import CartPage from "./CartPage.jsx";
 
@@ -10,11 +10,14 @@ const Router = () => {
         {
             path: "/",
             element: <App />,
-            children: [
-                { index: true, element: <HomePage /> },
-                { path: "shoppage", element: <ShopPage /> },
-                { path: "cartpage", element: <CartPage /> },
-            ],
+        },
+        {
+            path: "/shoppage",
+            element: <ShopPage />,
+        },
+        {
+            path: "/cartpage",
+            element: <CartPage />,
         },
     ]);
 
