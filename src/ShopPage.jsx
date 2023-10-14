@@ -10,9 +10,19 @@ function ShopPage() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [itemCount, setItemCount] = useState(() => {
-        const storedItemCount = localStorage.getItem("itemCount");
+        const storedItemCount = localStorage.getItem("items");
         return storedItemCount ? parseInt(storedItemCount) : 0;
     });
+
+    useEffect(() => {
+        if (shopItems) {
+            const totalQuantity = shopItems.reduce(
+                (total, item) => total + item.quantity,
+                0
+            );
+            setItemCount(totalQuantity);
+        }
+    }, [shopItems]);
 
     // Update localStorage whenever itemCount changes
     useEffect(() => {
@@ -47,6 +57,33 @@ function ShopPage() {
     // });
     // setShopItems(updatedProducts);
 
+    const handleInputChange = (e, id) => {
+        const updatedItems = shopItems.map((item) =>
+            item.id === id ? { ...item, quantity: e.target.value } : item
+        );
+        setShopItems(updatedItems);
+        console.log(shopItems);
+    };
+
+    const handleAdd = (id) => {
+        const updatedItems = shopItems.map((item) =>
+            item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+        setShopItems(updatedItems);
+        // setItemCount(itemCount + 1);
+        console.log(shopItems);
+    };
+
+    const handleRemove = (id) => {
+        const updatedItems = shopItems.map((item) =>
+            item.id === id
+                ? { ...item, quantity: Math.max(item.quantity - 1, 0) }
+                : item
+        );
+        setShopItems(updatedItems);
+        // setItemCount(Math.max(itemCount - 1, 0));
+    };
+
     return (
         <>
             <nav className="nav-bar">
@@ -79,19 +116,23 @@ function ShopPage() {
                         <div className="btn-set">
                             <button
                                 className="remove-btn"
-                                onClick={() =>
-                                    setItemCount(Math.max(itemCount - 1, 0))
-                                }
+                                onClick={() => handleRemove(item.id)}
                             >
                                 {""}
                                 <RemoveIcon fontSize="small" />
                             </button>
                             <form className="quantity" id="quantity">
-                                <input type="text" value={item.quantity} />
+                                <input
+                                    type="text"
+                                    value={item.quantity}
+                                    onChange={(e) =>
+                                        handleInputChange(e, item.id)
+                                    }
+                                />
                             </form>
                             <button
                                 className="add-btn"
-                                onClick={() => setItemCount(itemCount + 1)}
+                                onClick={() => handleAdd(item.id)}
                             >
                                 {""}
                                 <AddIcon fontSize="small" />
