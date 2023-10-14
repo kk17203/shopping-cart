@@ -18,6 +18,7 @@ function ShopPage() {
                 0
             );
             setItemCount(totalQuantity);
+            localStorage.setItem("itemCount", JSON.stringify(totalQuantity));
         }
     }, [shopItems]);
 
