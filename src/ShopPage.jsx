@@ -30,7 +30,7 @@ function ShopPage() {
         })
             .then((response) => response.json())
             .then((json) => {
-                // this next few lines takes the array from the api and adds a quantity field
+                // this next few lines takes the array from the api and adds a quantity field?? might need to update this comment
                 const updatedProducts = json.map((item) => ({
                     ...item,
                     quantity: 0,
@@ -54,7 +54,13 @@ function ShopPage() {
     const handleInputChange = (e, id) => {
         const updatedItems = shopItems.map((item) =>
             item.id === id
-                ? { ...item, quantity: parseInt(e.target.value) }
+                ? {
+                      ...item,
+                      //   Checks if target value is NaN. If so it applies 0
+                      quantity: isNaN(parseInt(e.target.value))
+                          ? 0
+                          : parseInt(e.target.value),
+                  }
                 : item
         );
         setShopItems(updatedItems);
