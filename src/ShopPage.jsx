@@ -9,10 +9,7 @@ function ShopPage() {
     const [shopItems, setShopItems] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [itemCount, setItemCount] = useState(() => {
-        const storedItemCount = localStorage.getItem("items");
-        return storedItemCount ? parseInt(storedItemCount) : 0;
-    });
+    const [itemCount, setItemCount] = useState(0);
 
     useEffect(() => {
         if (shopItems) {
@@ -25,11 +22,13 @@ function ShopPage() {
     }, [shopItems]);
 
     // Update localStorage whenever itemCount changes
-    useEffect(() => {
-        localStorage.setItem("itemCount", itemCount);
-    }, [itemCount]);
+    // useEffect(() => {
+    //     localStorage.setItem("itemCount", itemCount);
+    // }, [itemCount]);
 
     useEffect(() => {
+        const storedShopItems = JSON.parse(localStorage.getItem("shopItems"));
+
         fetch("https://fakestoreapi.com/products", {
             mode: "cors",
         })
@@ -40,7 +39,14 @@ function ShopPage() {
                     ...item,
                     quantity: 0,
                 }));
-                setShopItems(updatedProducts);
+                if (
+                    storedShopItems &&
+                    storedShopItems.length === updatedProducts.length
+                ) {
+                    setShopItems(storedShopItems);
+                } else {
+                    setShopItems(updatedProducts);
+                }
             })
             .catch((error) => setError(error))
             .finally(() => setLoading(false));
@@ -49,19 +55,22 @@ function ShopPage() {
     if (error) return <p>A network error was encountered</p>;
     if (loading) return <p>Loading...</p>;
 
-    // const updatedProducts = shopItems.map((item) => {
+    // const updatedItems = shopItems.map((item) => {
     //     return {
     //         ...item,
     //         quantity: 0,
     //     };
     // });
-    // setShopItems(updatedProducts);
+    // setShopItems(updatedItems);
 
     const handleInputChange = (e, id) => {
         const updatedItems = shopItems.map((item) =>
-            item.id === id ? { ...item, quantity: e.target.value } : item
+            item.id === id
+                ? { ...item, quantity: parseInt(e.target.value) }
+                : item
         );
         setShopItems(updatedItems);
+        localStorage.setItem("shopItems", JSON.stringify(updatedItems));
         console.log(shopItems);
     };
 
@@ -71,7 +80,6 @@ function ShopPage() {
         );
         setShopItems(updatedItems);
         // setItemCount(itemCount + 1);
-        console.log(shopItems);
     };
 
     const handleRemove = (id) => {
