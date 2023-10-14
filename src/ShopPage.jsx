@@ -112,7 +112,6 @@ function ShopPage() {
                         <p className="item-rating">
                             {item.rating.rate} out of {item.rating.count}
                         </p>
-                        <p className="quantity">{item.quantity}</p>
                         <div className="btn-set">
                             <button
                                 className="remove-btn"
