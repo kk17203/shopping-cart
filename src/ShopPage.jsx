@@ -22,11 +22,6 @@ function ShopPage() {
         }
     }, [shopItems]);
 
-    // Update localStorage whenever itemCount changes
-    // useEffect(() => {
-    //     localStorage.setItem("itemCount", itemCount);
-    // }, [itemCount]);
-
     useEffect(() => {
         const storedShopItems = JSON.parse(localStorage.getItem("shopItems"));
 
@@ -56,14 +51,6 @@ function ShopPage() {
     if (error) return <p>A network error was encountered</p>;
     if (loading) return <p>Loading...</p>;
 
-    // const updatedItems = shopItems.map((item) => {
-    //     return {
-    //         ...item,
-    //         quantity: 0,
-    //     };
-    // });
-    // setShopItems(updatedItems);
-
     const handleInputChange = (e, id) => {
         const updatedItems = shopItems.map((item) =>
             item.id === id
@@ -80,7 +67,6 @@ function ShopPage() {
             item.id === id ? { ...item, quantity: item.quantity + 1 } : item
         );
         setShopItems(updatedItems);
-        // setItemCount(itemCount + 1);
     };
 
     const handleRemove = (id) => {
@@ -90,7 +76,6 @@ function ShopPage() {
                 : item
         );
         setShopItems(updatedItems);
-        // setItemCount(Math.max(itemCount - 1, 0));
     };
 
     return (
