@@ -11,6 +11,7 @@ function ShopPage() {
     const [loading, setLoading] = useState(true);
     const [itemCount, setItemCount] = useState(0);
 
+    // This useEffect ensures that whenever there's a change in the shopItems array, it calculates the total amount of items across all quantity properties and updates the itemCount state with this total. It also stores this total quantity in the local storage for persistence.
     useEffect(() => {
         if (shopItems) {
             const totalQuantity = shopItems.reduce(
@@ -22,6 +23,7 @@ function ShopPage() {
         }
     }, [shopItems]);
 
+    // This useEffect gets the shopItems array stored on localStorage and assigns it as storedShopItems. It then fetches an array of items from the fakestoreapi, adds a quantity property to each object, and assigns it as updatedProducts. It checks to see if storedShopItems is truthy and compares storedShopItems and updatedProducts lengths. If they match (nothing new added to fetched array), we setShopItems as storedShopItems (keeping our stored quantity properties), if they don't match (something new was added from out shop), we setShopItems as updatedProducts (resetting our quantity properties to 0). Finally we have lines to catch errors or display loading screen.
     useEffect(() => {
         const storedShopItems = JSON.parse(localStorage.getItem("shopItems"));
 
@@ -30,7 +32,6 @@ function ShopPage() {
         })
             .then((response) => response.json())
             .then((json) => {
-                // this next few lines takes the array from the api and adds a quantity field?? might need to update this comment
                 const updatedProducts = json.map((item) => ({
                     ...item,
                     quantity: 0,
@@ -51,12 +52,12 @@ function ShopPage() {
     if (error) return <p>A network error was encountered</p>;
     if (loading) return <p>Loading...</p>;
 
+    // handleInputChange maps through all shopItems, checks to see if each matches the item.id from the event, and changes the quantity of the matching item to the event target value (As long as the value is a number. If NaN, it sets value to 0). It then updates setShopItems and pushes to localStorage.
     const handleInputChange = (e, id) => {
         const updatedItems = shopItems.map((item) =>
             item.id === id
                 ? {
                       ...item,
-                      //   Checks if target value is NaN. If so it applies 0
                       quantity: isNaN(parseInt(e.target.value))
                           ? 0
                           : parseInt(e.target.value),
@@ -65,9 +66,9 @@ function ShopPage() {
         );
         setShopItems(updatedItems);
         localStorage.setItem("shopItems", JSON.stringify(updatedItems));
-        console.log(shopItems);
     };
 
+    // handleAdd maps through shopItems to find the matching item.id, changes the quantity of this item to current value + 1, then updates setShopItems
     const handleAdd = (id) => {
         const updatedItems = shopItems.map((item) =>
             item.id === id ? { ...item, quantity: item.quantity + 1 } : item
@@ -75,6 +76,7 @@ function ShopPage() {
         setShopItems(updatedItems);
     };
 
+    // handleRemove maps through shopItems to find the matching item.id, changes the quantity of this item to current value - 1 (while using Math.max to make sure we don't go below 0), then updates setShopItems
     const handleRemove = (id) => {
         const updatedItems = shopItems.map((item) =>
             item.id === id

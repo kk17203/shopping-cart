@@ -4,6 +4,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { useState } from "react";
 
 function NavBar() {
+    // This useState uses a function to calculate its initial state, pulling itemCount from local storage or (if no itemCount stored) setting state to 0.
     const [itemCount] = useState(() => {
         const storedItemCount = localStorage.getItem("itemCount");
         return storedItemCount ? parseInt(storedItemCount) : 0;
