@@ -87,7 +87,7 @@ function ShopPage() {
     };
 
     return (
-        <>
+        <div className="container">
             <nav className="nav-bar">
                 <h1>Shopping Cart Project</h1>
                 <ul>
@@ -142,7 +142,7 @@ function ShopPage() {
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     );
 }
 

@@ -3,9 +3,9 @@
     line-height: 1.5;
     font-weight: 400;
 
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    /* color-scheme: light dark; */
+    /* color: rgba(255, 255, 255, 0.87); */
+    background-color: #b4b4b456;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -21,12 +21,20 @@ body {
 #root {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
     align-items: center;
+}
+
+.container {
+    display: grid;
+    justify-items: center;
+    /* max-width: 1200px; */
+    grid-template-rows: 65px 1fr;
+    width: 100%;
 }
 
 a {
     /* text-decoration: none; */
-    color: white;
 }
 
 /* Navigation Section */
@@ -35,10 +43,11 @@ a {
     justify-content: space-between;
     align-items: center;
     padding: 15px 32px;
-    background-color: #242424;
-    color: white;
-    background-color: rgba(6, 6, 179, 0.671);
-    width: 1200px;
+    background-color: white;
+    width: 100%;
+    /* max-width: 70%; */
+    box-sizing: border-box;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .quantity {
@@ -58,7 +67,7 @@ a {
 .shop-card-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    max-width: 1160px;
+    /* max-width: 1160px; */
     margin: 20px;
 }
 
