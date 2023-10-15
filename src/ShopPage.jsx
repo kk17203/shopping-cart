@@ -101,11 +101,13 @@ function ShopPage() {
                     <li className={isOnPage ? "highlighted" : ""}>
                         <Link to="/shoppage">Shop Page</Link>
                     </li>
-                    <Link to="/cartpage">
-                        <Badge badgeContent={itemCount} color="primary">
-                            <ShoppingCartIcon />{" "}
-                        </Badge>
-                    </Link>
+                    <li>
+                        <Link to="/cartpage">
+                            <Badge badgeContent={itemCount} color="primary">
+                                <ShoppingCartIcon />{" "}
+                            </Badge>
+                        </Link>
+                    </li>
                 </ul>
             </div>
             <div className="shop-card-container">

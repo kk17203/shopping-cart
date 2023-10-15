@@ -73,6 +73,16 @@ a {
     border-radius: 5px;
 }
 
+li:hover {
+    background-color: rgb(231, 230, 230);
+    border-radius: 5px;
+}
+
+li:active {
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
 .shop-card-container {
     display: grid;
     gap: 20px;
