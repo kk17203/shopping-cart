@@ -10,12 +10,15 @@ function App() {
         return storedItemCount ? parseInt(storedItemCount) : 0;
     });
 
+    // This line checks to see if the current page is the home page, and if so, adds a class of "highlighted" to the home link in the nav bar.
+    const isOnPage = location.pathname === "/";
+
     return (
         <div className="container">
             <nav className="nav-bar">
                 <h1>Shopping Cart Project</h1>
                 <ul>
-                    <li>
+                    <li className={isOnPage ? "highlighted" : ""}>
                         <Link to="/">Home Page</Link>
                     </li>
                     <li>

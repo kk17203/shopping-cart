@@ -86,6 +86,9 @@ function ShopPage() {
         setShopItems(updatedItems);
     };
 
+    // This line checks to see if the current page is the shop page, and if so, adds a class of "highlighted" to the shop link in the nav bar.
+    const isOnPage = location.pathname === "/shoppage";
+
     return (
         <div className="container">
             <nav className="nav-bar">
@@ -94,7 +97,7 @@ function ShopPage() {
                     <li>
                         <Link to="/">Home Page</Link>
                     </li>
-                    <li>
+                    <li className={isOnPage ? "highlighted" : ""}>
                         <Link to="/shoppage">Shop Page</Link>
                     </li>
                     <Link to="/cartpage">

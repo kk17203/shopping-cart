@@ -34,9 +34,14 @@ body {
 }
 
 a {
-    /* text-decoration: none; */
+    text-decoration: none;
+    color: black;
 }
 
+.highlighted {
+    background-color: lightgray;
+    border-radius: 5px;
+}
 /* Navigation Section */
 .nav-bar {
     display: flex;
