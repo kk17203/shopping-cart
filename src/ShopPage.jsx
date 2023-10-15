@@ -4,6 +4,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import { Link } from "react-router-dom";
 import { Badge } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
+import StarIcon from "@material-ui/icons/StarRateTwoTone";
 
 function ShopPage() {
     const [shopItems, setShopItems] = useState(null);
@@ -91,7 +92,7 @@ function ShopPage() {
 
     return (
         <div className="container">
-            <nav className="nav-bar">
+            <div className="nav-bar">
                 <h1>Shopping Cart Project</h1>
                 <ul>
                     <li>
@@ -101,22 +102,23 @@ function ShopPage() {
                         <Link to="/shoppage">Shop Page</Link>
                     </li>
                     <Link to="/cartpage">
-                        <Badge badgeContent={itemCount} color="secondary">
+                        <Badge badgeContent={itemCount} color="primary">
                             <ShoppingCartIcon />{" "}
                         </Badge>
                     </Link>
                 </ul>
-            </nav>
+            </div>
             <div className="shop-card-container">
                 {shopItems.map((item) => (
                     <div key={item.id} className="item-card">
                         <h3 className="item-title">{item.title}</h3>
                         <img src={item.image} alt="" className="item-img" />
                         {/* <p className="item-desc">{item.description}</p> */}
-                        <p className="item-price">${item.price}</p>
                         <p className="item-rating">
-                            {item.rating.rate} out of {item.rating.count}
+                            <StarIcon fontSize="small" className="star" />
+                            {item.rating.rate}
                         </p>
+                        <p className="item-price">${item.price}</p>
                         <div className="btn-set">
                             <button
                                 className="remove-btn"

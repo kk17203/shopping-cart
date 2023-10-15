@@ -15,7 +15,7 @@ function CartPage() {
 
     return (
         <div className="container">
-            <nav className="nav-bar">
+            <div className="nav-bar">
                 <h1>Shopping Cart Project</h1>
                 <ul>
                     <li>
@@ -26,13 +26,13 @@ function CartPage() {
                     </li>
                     <li className={isOnPage ? "highlighted" : ""}>
                         <Link to="/cartpage">
-                            <Badge badgeContent={itemCount} color="secondary">
+                            <Badge badgeContent={itemCount} color="primary">
                                 <ShoppingCartIcon />{" "}
                             </Badge>
                         </Link>
                     </li>
                 </ul>
-            </nav>
+            </div>
             <div>This is cart Page</div>
         </div>
     );

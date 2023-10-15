@@ -15,7 +15,7 @@ function App() {
 
     return (
         <div className="container">
-            <nav className="nav-bar">
+            <div className="nav-bar">
                 <h1>Shopping Cart Project</h1>
                 <ul>
                     <li className={isOnPage ? "highlighted" : ""}>
@@ -25,12 +25,12 @@ function App() {
                         <Link to="/shoppage">Shop Page</Link>
                     </li>
                     <Link to="/cartpage">
-                        <Badge badgeContent={itemCount} color="secondary">
+                        <Badge badgeContent={itemCount} color="primary">
                             <ShoppingCartIcon />{" "}
                         </Badge>
                     </Link>
                 </ul>
-            </nav>
+            </div>
             <div>This is home Page</div>
         </div>
     );
