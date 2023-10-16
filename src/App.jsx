@@ -45,8 +45,8 @@ function App() {
                         >
                             Shopping Cart
                         </a>{" "}
-                        lesson in the Odin Project's Full Stack JavaScript path.
-                        To see the code for this project, please visit my{" "}
+                        lesson in The Odin Project&apos;s Full Stack JavaScript
+                        path. To see the code for this project, please visit my{" "}
                         <a
                             href="https://github.com/kk17203/shopping-cart"
                             target="_blank"
@@ -55,6 +55,9 @@ function App() {
                             GitHub Repository.
                         </a>
                     </p>
+                    <button className="shop-btn">
+                        <Link to="/shoppage">Shop All Products</Link>
+                    </button>
                 </div>
             </div>
         </div>

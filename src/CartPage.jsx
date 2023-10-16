@@ -20,6 +20,14 @@ function CartPage() {
         return storedShopItems ? JSON.parse(storedShopItems) : [];
     });
 
+    const [total, setTotal] = useState(() => {
+        const totalPrice = cartProducts.reduce(
+            (total, item) => total + item.price * item.quantity,
+            0
+        );
+        return totalPrice.toFixed(2);
+    });
+
     useEffect(() => {
         if (shopItems) {
             const totalQuantity = shopItems.reduce(
@@ -32,6 +40,12 @@ function CartPage() {
             const cartItems = shopItems.filter((item) => item.quantity > 0);
             setCartProducts(cartItems);
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+            const totalPrice = shopItems.reduce(
+                (total, item) => total + item.price * item.quantity,
+                0
+            );
+            setTotal(totalPrice.toFixed(2));
         }
     }, [shopItems]);
 
@@ -53,13 +67,18 @@ function CartPage() {
         setCartProducts(updatedProducts);
         localStorage.setItem("shopItems", JSON.stringify(updatedShopItems));
         localStorage.setItem("cartItems", JSON.stringify(updatedProducts));
-        console.log(cartProducts);
     };
 
     return (
         <div className="cart-container">
             <div className="nav-bar">
                 <h1>Shopping Cart Project</h1>
+                <div className="total">
+                    <span>
+                        Subtotal: <b>${total}</b>
+                    </span>
+                    <button className="checkout-btn">Checkout</button>
+                </div>
                 <ul>
                     <li>
                         <Link to="/">Home Page</Link>
@@ -78,7 +97,7 @@ function CartPage() {
             </div>
             <div className="cart-card-container">
                 {itemCount === 0 ? (
-                    <p>Empty</p>
+                    <p>Your shopping cart is empty</p>
                 ) : (
                     cartProducts.map((item) => (
                         <div key={item.id} className="cart-item-card">
@@ -88,7 +107,9 @@ function CartPage() {
                                 className="cart-item-img"
                             />
                             <h3 className="cart-item-title">{item.title}</h3>
-                            <p className="cart-item-price">${item.price}</p>
+                            <p className="cart-item-price">
+                                ${item.price.toFixed(2)}
+                            </p>
                             <button
                                 className="remove-btn-cart"
                                 onClick={() => handleRemove(item.id)}

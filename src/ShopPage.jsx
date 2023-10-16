@@ -70,8 +70,6 @@ function ShopPage() {
                 : item
         );
         setShopItems(updatedItems);
-        console.log(cartProducts);
-        console.log(shopItems);
         localStorage.setItem("shopItems", JSON.stringify(updatedItems));
     };
 
@@ -128,7 +126,7 @@ function ShopPage() {
                             <StarIcon fontSize="small" className="star" />
                             {item.rating.rate}
                         </p>
-                        <p className="item-price">${item.price}</p>
+                        <p className="item-price">${item.price.toFixed(2)}</p>
                         <div className="btn-set">
                             <button
                                 className="remove-btn"
