@@ -14,7 +14,7 @@ function App() {
     const isOnPage = location.pathname === "/";
 
     return (
-        <div className="container">
+        <div className="app-container">
             <div className="nav-bar">
                 <h1>Shopping Cart Project</h1>
                 <ul>
@@ -33,7 +33,30 @@ function App() {
                     </li>
                 </ul>
             </div>
-            <div>This is home Page</div>
+            <div className="app-main">
+                <div className="welcome-card">
+                    <h1>Welcome</h1>
+                    <p>
+                        This site is a project for the{" "}
+                        <a
+                            href="https://www.theodinproject.com/lessons/node-path-react-new-shopping-cart"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            Shopping Cart
+                        </a>{" "}
+                        lesson in the Odin Project's Full Stack JavaScript path.
+                        To see the code for this project, please visit my{" "}
+                        <a
+                            href="https://github.com/kk17203/shopping-cart"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            GitHub Repository.
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
     );
 }

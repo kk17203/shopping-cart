@@ -14,7 +14,7 @@ function CartPage() {
     const isOnPage = location.pathname === "/cartpage";
 
     return (
-        <div className="container">
+        <div className="cart-container">
             <div className="nav-bar">
                 <h1>Shopping Cart Project</h1>
                 <ul>

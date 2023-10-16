@@ -91,7 +91,7 @@ function ShopPage() {
     const isOnPage = location.pathname === "/shoppage";
 
     return (
-        <div className="container">
+        <div className="nav-container">
             <div className="nav-bar">
                 <h1>Shopping Cart Project</h1>
                 <ul>
