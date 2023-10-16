@@ -1,22 +1,60 @@
 import { Link } from "react-router-dom";
 import { Badge } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function CartPage() {
     // This useState uses a function to calculate its initial state, pulling cartProducts from local storage or (if no cartProducts stored) setting state to an empty array.
-    const [cartProducts] = useState(() => {
+    const [cartProducts, setCartProducts] = useState(() => {
         const storedCartProducts = localStorage.getItem("cartItems");
         return storedCartProducts ? JSON.parse(storedCartProducts) : [];
     });
     // This useState uses a function to calculate its initial state, pulling itemCount from local storage or (if no itemCount stored) setting state to 0.
-    const [itemCount] = useState(() => {
+    const [itemCount, setItemCount] = useState(() => {
         const storedItemCount = localStorage.getItem("itemCount");
         return storedItemCount ? parseInt(storedItemCount) : 0;
     });
 
+    const [shopItems, setShopItems] = useState(() => {
+        const storedShopItems = localStorage.getItem("shopItems");
+        return storedShopItems ? JSON.parse(storedShopItems) : [];
+    });
+
+    useEffect(() => {
+        if (shopItems) {
+            const totalQuantity = shopItems.reduce(
+                (total, item) => total + item.quantity,
+                0
+            );
+            setItemCount(totalQuantity);
+            localStorage.setItem("itemCount", JSON.stringify(totalQuantity));
+
+            const cartItems = shopItems.filter((item) => item.quantity > 0);
+            setCartProducts(cartItems);
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
+    }, [shopItems]);
+
     // This line checks to see if the current page is the cart page, and if so, adds a class of "highlighted" to the cart link in the nav bar.
     const isOnPage = location.pathname === "/cartpage";
+
+    const handleRemove = (id) => {
+        const updatedShopItems = shopItems.map((item) =>
+            item.id === id
+                ? { ...item, quantity: Math.max(item.quantity - 1, 0) }
+                : item
+        );
+        const updatedProducts = cartProducts.map((item) =>
+            item.id === id
+                ? { ...item, quantity: Math.max(item.quantity - 1, 0) }
+                : item
+        );
+        setShopItems(updatedShopItems);
+        setCartProducts(updatedProducts);
+        localStorage.setItem("shopItems", JSON.stringify(updatedShopItems));
+        localStorage.setItem("cartItems", JSON.stringify(updatedProducts));
+        console.log(cartProducts);
+    };
 
     return (
         <div className="cart-container">
@@ -39,7 +77,7 @@ function CartPage() {
                 </ul>
             </div>
             <div className="cart-card-container">
-                {cartProducts.length === 0 ? (
+                {itemCount === 0 ? (
                     <p>Empty</p>
                 ) : (
                     cartProducts.map((item) => (
@@ -51,7 +89,10 @@ function CartPage() {
                             />
                             <h3 className="cart-item-title">{item.title}</h3>
                             <p className="cart-item-price">${item.price}</p>
-                            <button className="remove-btn-cart">
+                            <button
+                                className="remove-btn-cart"
+                                onClick={() => handleRemove(item.id)}
+                            >
                                 Remove Item
                                 <p className="cart-item-quantity">
                                     Qty:
