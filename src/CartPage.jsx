@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { Badge } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { useState } from "react";
-import RemoveIcon from "@material-ui/icons/Remove";
 
 function CartPage() {
     // This useState uses a function to calculate its initial state, pulling cartProducts from local storage or (if no cartProducts stored) setting state to an empty array.
@@ -39,22 +38,26 @@ function CartPage() {
                     </li>
                 </ul>
             </div>
-            <div className="shop-card-container">
+            <div className="cart-card-container">
                 {cartProducts.length === 0 ? (
                     <p>Empty</p>
                 ) : (
                     cartProducts.map((item) => (
-                        <div key={item.id} className="item-card">
-                            <h3 className="item-title">{item.title}</h3>
-                            <img src={item.image} alt="" className="item-img" />
-                            <p className="item-price">${item.price}</p>
-                            <p className="item-quantity">{item.quantity}</p>
-                            <div className="btn-set">
-                                <button className="remove-btn">
-                                    {""}
-                                    <RemoveIcon fontSize="small" />
-                                </button>
-                            </div>
+                        <div key={item.id} className="cart-item-card">
+                            <img
+                                src={item.image}
+                                alt=""
+                                className="cart-item-img"
+                            />
+                            <h3 className="cart-item-title">{item.title}</h3>
+                            <p className="cart-item-price">${item.price}</p>
+                            <button className="remove-btn-cart">
+                                Remove Item
+                                <p className="cart-item-quantity">
+                                    Qty:
+                                    {item.quantity}
+                                </p>
+                            </button>
                         </div>
                     ))
                 )}
