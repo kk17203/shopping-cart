@@ -11,15 +11,19 @@ function ShopPage() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [itemCount, setItemCount] = useState(0);
+    const [cartProducts, setCartProducts] = useState(null);
 
-    // This useEffect ensures that whenever there's a change in the shopItems array, it calculates the total amount of items across all quantity properties and updates the itemCount state with this total. It also stores this total quantity in the local storage for persistence.
+    // This useEffect verifies shopItems is truthy, calculates the total value in the quantity properties of the array to give the total number of items in the cart, and sets the itemCount to this value. It also filters through the shopItems array to create a new array of only items with a quantity greater than 0, and sets this as cartProducts. Finally, it pushes both of these to localStorage.
     useEffect(() => {
         if (shopItems) {
             const totalQuantity = shopItems.reduce(
                 (total, item) => total + item.quantity,
                 0
             );
+            const cartItems = shopItems.filter((item) => item.quantity > 0);
+            setCartProducts(cartItems);
             setItemCount(totalQuantity);
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
             localStorage.setItem("itemCount", JSON.stringify(totalQuantity));
         }
     }, [shopItems]);
@@ -66,6 +70,8 @@ function ShopPage() {
                 : item
         );
         setShopItems(updatedItems);
+        console.log(cartProducts);
+        console.log(shopItems);
         localStorage.setItem("shopItems", JSON.stringify(updatedItems));
     };
 
@@ -75,6 +81,7 @@ function ShopPage() {
             item.id === id ? { ...item, quantity: item.quantity + 1 } : item
         );
         setShopItems(updatedItems);
+        localStorage.setItem("shopItems", JSON.stringify(updatedItems));
     };
 
     // handleRemove maps through shopItems to find the matching item.id, changes the quantity of this item to current value - 1 (while using Math.max to make sure we don't go below 0), then updates setShopItems
@@ -85,6 +92,7 @@ function ShopPage() {
                 : item
         );
         setShopItems(updatedItems);
+        localStorage.setItem("shopItems", JSON.stringify(updatedItems));
     };
 
     // This line checks to see if the current page is the shop page, and if so, adds a class of "highlighted" to the shop link in the nav bar.
