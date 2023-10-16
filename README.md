@@ -12,11 +12,11 @@ Calculate and display the subtotal of the items in the cart
 
 # Technologies
 
-React.js
-React Router
-Material-UI
-JavaScript (ES6+)
-HTML5
+React.js,
+React Router,
+Material-UI,
+JavaScript (ES6+),
+HTML5,
 CSS3
 
 # Setup
