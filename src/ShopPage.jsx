@@ -4,7 +4,6 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import { Link } from "react-router-dom";
 import { Badge } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCartOutlined";
-import StarIcon from "@material-ui/icons/StarRateTwoTone";
 
 function ShopPage() {
     const [shopItems, setShopItems] = useState(null);
@@ -122,10 +121,7 @@ function ShopPage() {
                         <h3 className="item-title">{item.title}</h3>
                         <img src={item.image} alt="" className="item-img" />
                         {/* <p className="item-desc">{item.description}</p> */}
-                        <p className="item-rating">
-                            <StarIcon fontSize="small" className="star" />
-                            {item.rating.rate}
-                        </p>
+                        <p className="item-rating">{item.rating.rate}</p>
                         <p className="item-price">${item.price.toFixed(2)}</p>
                         <div className="btn-set">
                             <button
